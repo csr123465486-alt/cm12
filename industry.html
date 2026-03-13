@@ -5,6 +5,46 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>적용산업 | 주식회사 씨엠</title>
   <link rel="stylesheet" href="style.css">
+  
+  <style>
+    /* 탭(Tab) 화면 전환 전용 스타일 */
+    .tab-content { display: none; animation: fadeIn 0.4s ease-in-out forwards; }
+    .tab-content.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* 산업별 인트로 인용구 */
+    .intro-quote { background: #f8f9fa; padding: 50px 60px; border-radius: 20px; border-left: 6px solid var(--accent); margin-bottom: 60px; box-shadow: var(--shadow-light); }
+    .intro-quote h3 { font-size: 1.8rem; font-weight: 800; color: var(--accent); margin-bottom: 20px; letter-spacing: -1px; word-break: keep-all; line-height: 1.4; }
+    .intro-quote p { font-size: 1.15rem; line-height: 1.7; color: #444; word-break: keep-all; }
+
+    .sub-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 30px; color: #111; text-align: center; margin-top: 60px; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .sub-title-left { font-size: 1.5rem; font-weight: 800; margin-bottom: 25px; margin-top: 50px; color: #111; border-left: 4px solid var(--accent); padding-left: 15px; }
+
+    /* 카드 그리드 레이아웃 */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 40px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-bottom: 40px; }
+
+    .info-card { background: #fff; border: 1px solid var(--card-border); padding: 40px 30px; border-radius: 15px; box-shadow: var(--shadow-light); transition: 0.3s; display: flex; flex-direction: column; }
+    .info-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); border-color: var(--accent); }
+    .info-card h4 { font-size: 1.3rem; font-weight: 800; color: #111; margin-bottom: 20px; word-break: keep-all; line-height: 1.4; }
+    .info-card p { font-size: 1.05rem; color: #555; line-height: 1.6; word-break: keep-all; margin-bottom: 15px; }
+    
+    /* 개요(Overview) 전용 클릭 가능한 카드 스타일 */
+    .overview-card { cursor: pointer; border: 2px solid #eef0f2; }
+    .overview-card:hover { border-color: var(--accent); background: #fdfefe; }
+    .overview-link { color: var(--accent); font-weight: 800; margin-top: 20px; display: inline-block; font-size: 1.05rem; }
+
+    /* 카드 내부 리스트 스타일 */
+    .card-list { list-style: none; padding: 0; margin-top: auto; }
+    .card-list li { position: relative; padding-left: 15px; margin-bottom: 12px; font-size: 1rem; color: #555; line-height: 1.5; word-break: keep-all; }
+    .card-list li::before { content: '-'; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
+    .card-list li strong { color: var(--accent); }
+
+    @media (max-width: 992px) {
+      .grid-3, .grid-2 { grid-template-columns: 1fr; }
+      .intro-quote { padding: 40px 30px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -17,17 +57,216 @@
       <nav class="site-nav">
         <div class="nav-item"><a href="about.html">회사소개</a></div>
         <div class="nav-item"><a href="product.html">제품소개</a></div>
-        <div class="nav-item"><a href="industry.html" class="active">적용산업</a>
-          <div class="dropdown">
-            <a href="industry.html#auto">자동차 산업</a>
-            <a href="industry.html#heavy">중공업 분야</a>
-            <a href="industry.html#battery">2차전지</a>
-          </div>
-        </div>
+        <div class="nav-item"><a href="industry.html" class="active">적용산업</a></div>
         <div class="nav-item"><a href="contents.html">컨텐츠</a></div>
       </nav>
     </div>
   </header>
+
+  <main class="page-content container">
+    <div class="section-head center">
+      <span class="section-tag">TARGET INDUSTRIES</span>
+      <h2 class="main-title">현장 맞춤형 AI 적용 분야</h2>
+    </div>
+
+    <div class="sub-tabs" id="tab-menu">
+      <a onclick="switchTab('tab-0', 'btn-0')" id="btn-0" class="active">전체 개요</a>
+      <a onclick="switchTab('tab-1', 'btn-1')" id="btn-1">자동차 산업</a>
+      <a onclick="switchTab('tab-2', 'btn-2')" id="btn-2">중공업·조선 산업</a>
+      <a onclick="switchTab('tab-3', 'btn-3')" id="btn-3">2차 전지 산업</a>
+    </div>
+
+    <div id="tab-0" class="tab-content active">
+      <div class="intro-quote" style="text-align: center; border-left: none; border-top: 6px solid var(--accent);">
+        <h3>"산업의 경계를 넘어,<br>제조 현장의 완벽한 지능화를 구현합니다."</h3>
+        <p style="max-width: 800px; margin: 0 auto;">정밀한 품질 관리와 무중단 설비 운영이 필수적인 첨단 제조 산업에 최적화된 맞춤형 솔루션을 제공합니다. 아래 각 산업 분야를 클릭하여 주식회사 씨엠의 디테일한 기술력을 확인해 보세요.</p>
+      </div>
+
+      <div class="grid-3">
+        <div class="info-card overview-card" onclick="switchTab('tab-1', 'btn-1')">
+          <span style="font-size: 2.5rem; margin-bottom: 15px;">🚘</span>
+          <h4 style="color: var(--accent); font-size: 1.5rem;">자동차 산업</h4>
+          <p>차체 용접 불량 실시간 검출, 전동화 핵심 모터 조립 검사 및 내구 시험 고장 예측으로 무결점 양산을 보증합니다.</p>
+          <span class="overview-link">상세 내용 보기 ➔</span>
+        </div>
+        <div class="info-card overview-card" onclick="switchTab('tab-2', 'btn-2')">
+          <span style="font-size: 2.5rem; margin-bottom: 15px;">🏗️</span>
+          <h4 style="color: var(--accent); font-size: 1.5rem;">중공업·조선 산업</h4>
+          <p>거대한 구조물의 아크 용접 심층 결함을 투시하듯 찾아내고 극한의 현장 환경을 견디는 맞춤형 인프라를 제공합니다.</p>
+          <span class="overview-link">상세 내용 보기 ➔</span>
+        </div>
+        <div class="info-card overview-card" onclick="switchTab('tab-3', 'btn-3')">
+          <span style="font-size: 2.5rem; margin-bottom: 15px;">🔋</span>
+          <h4 style="color: var(--accent); font-size: 1.5rem;">2차 전지 산업</h4>
+          <p>배터리 폼팩터별 초정밀 용접 검사와 핵심 공정 설비의 무중단 예지 보전으로 압도적 수율을 확보합니다.</p>
+          <span class="overview-link">상세 내용 보기 ➔</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-1" class="tab-content">
+      
+      <div class="intro-quote">
+        <h3>"수만 개의 부품이 맞물려 돌아가는 자동차,<br>단 하나의 미세한 결함도 허락하지 않습니다."</h3>
+        <p>자동차 산업은 탑승자의 생명과 직결되므로 부품의 완벽한 품질과 내구성이 요구됩니다. 주식회사 씨엠은 <strong>차체 용접부터 모터 조립, 그리고 EOL(End of Line) 내구 시험에 이르는 전 공정</strong>에 산업용 AI 신호 분석을 적용하여 불량 유출을 원천 차단합니다. 기존 작업자의 청각이나 시각에 의존하던 관능 검사의 한계를 극복하고, 100% 데이터 기반의 전수 검사 체계를 완성합니다.</p>
+      </div>
+
+      <h3 class="sub-title">💡 핵심 적용 공정 및 솔루션</h3>
+      
+      <div class="grid-3">
+        <div class="info-card">
+          <h4>01. 자동차 차체 및 핵심 부품<br>용접 불량 실시간 검출</h4>
+          <p>차체 프레임부터 정밀 전장 부품까지 다양한 용접 공정에서 발생하는 미세 결함을 찰나의 순간에 찾아냅니다.</p>
+          <ul class="card-list">
+            <li><strong>아크 용접 (CO2, MIG, TIG 등):</strong> 전류/전압 신호 분석으로 기공(Porosity), 용락(Burn-through), 블로우홀 등 내부 결함 실시간 검출</li>
+            <li><strong>저항 용접 (스팟, 프로젝션, 스터드):</strong> 격벽 판넬 스터드 용접 등에서 발생하는 관통 및 기공 결함 즉각 판별</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h4>02. 전동화(EV) 핵심 구동 부품<br>조립 불량 검사</h4>
+          <p>내연기관을 넘어 전기차(EV) 시대를 위한 핵심 모터 및 구동계 부품의 무결점 조립을 보증합니다.</p>
+          <ul class="card-list">
+            <li><strong>모터 소음 및 진동 검사:</strong> 차량용 자동 시트 모터, 윈도우 모터 등 핵심 회전 부품의 초음파 용접 및 조립 시 이음/미세 진동 불량 검출</li>
+            <li>가속도 센서 및 마이크로폰(최대 4ch, 20kS/s)을 활용한 정밀 측정으로 불량품 사전 차단</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h4>03. 엔진/미션/현가장치<br>내구 시험 고장 예측 (P/M)</h4>
+          <p>차량 구동계의 혹독한 내구 시험 환경에서 발생하는 데이터를 분석하여 파손을 예측합니다.</p>
+          <ul class="card-list">
+            <li>상용차/승용차 엔진, 모터, 트랜스미션, 서스펜션 시험 시 16채널 가속도 센서로 베어링 및 결합부 파손 예측</li>
+            <li><strong>CAN 통신 데이터 활용:</strong> 주행 모드를 AI가 인식하고 오더 분석(Order Analysis)을 통해 고장 부위 정확히 특정</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-2" class="tab-content">
+      
+      <div class="intro-quote">
+        <h3>"극한의 환경과 초대형 구조물,<br>보이지 않는 심부 결함이 가장 큰 위협입니다."</h3>
+        <p>중공업과 조선 산업은 선박, 해양 플랜트, 중장비 등 거대한 스케일의 철 구조물을 다룹니다. 두꺼운 강판을 이어 붙이는 용접 과정에서 내부 결함이 발생하면 치명적인 안전사고로 이어질 수 있습니다. 주식회사 씨엠은 열악한 현장에서도 왜곡 없이 신호를 수집하는 견고한 하드웨어와, <strong>보이지 않는 심부 결함까지 투시하듯 찾아내는 AI 소프트웨어</strong>로 중후장대 산업의 품질 혁신을 이끕니다.</p>
+      </div>
+
+      <h3 class="sub-title">💡 핵심 적용 공정 및 솔루션</h3>
+
+      <div class="grid-2">
+        <div class="info-card">
+          <h4 style="font-size: 1.5rem;">01. 대형 구조물 아크 용접(CO2)<br>심층 결함 실시간 탐지</h4>
+          <p>두꺼운 철판을 접합하는 중공업 특성상 육안 검사만으로는 용접 품질을 담보하기 어렵습니다. 당사의 솔루션(INS LC-AD-2)은 용접 순간의 전류/전압 파형을 초당 2만 번(20kS/s) 정밀 측정합니다.</p>
+          <ul class="card-list" style="margin-top: 15px;">
+            <li><strong>적용 사례:</strong> 굴삭기의 센터 프레임(Center Frame) 및 선박 강도를 유지하는 스티프너(Stiffener) 구조물 용접 라인 적용</li>
+            <li><strong>주요 검출 항목:</strong> 금속이 완전히 녹지 않은 용입 부족(Lack of fusion), 내부에 가스가 갇힌 기공(Porosity), 미세 균열(Crack) 즉각 탐지 및 재작업(Rework) 지점 안내</li>
+          </ul>
+        </div>
+
+        <div class="info-card">
+          <h4 style="font-size: 1.5rem;">02. 극한의 현장 환경을 극복하는<br>산업용 특화 인프라</h4>
+          <p>일반적인 IT 장비가 버틸 수 없는 혹독한 조선/중공업 현장 맞춤형 인프라를 제공하여 유지보수 비용을 절감합니다.</p>
+          <ul class="card-list" style="margin-top: 15px;">
+            <li>강한 전자기파(EMI) 노이즈, 용접 불꽃, 쇳가루 분진 속에서도 안정적으로 동작하는 <strong>노이즈 차폐 및 산업용 하드웨어 설계</strong></li>
+            <li>기존 초음파 탐상(UT)이나 방사선 투과 검사(RT) 등 값비싼 <strong>비파괴 후공정 검사 비용과 시간을 획기적으로 단축</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div id="tab-3" class="tab-content">
+      
+      <div class="intro-quote">
+        <h3>"초당 수십 개의 배터리가 쏟아지는 양산 라인,<br>멈추지 않는 공장과 폭발 위험 제로를 달성합니다."</h3>
+        <p>전기차와 스마트 기기의 심장인 2차 전지 제조 라인은 극한의 정밀도와 속도가 요구됩니다. 미세한 이물질이나 용접 불량 하나가 화재나 폭발로 이어질 수 있으며, 핵심 설비가 단 1분만 멈춰도 막대한 손실이 발생합니다. 주식회사 씨엠은 <strong>초고속 샘플링 기술과 다차원 AI 분석을 통해 생산 수율 극대화와 무중단 예지 보전</strong>을 완벽하게 지원합니다.</p>
+      </div>
+
+      <h3 class="sub-title">💡 핵심 적용 공정 및 솔루션</h3>
+
+      <h3 class="sub-title-left">01. 배터리 셀 폼팩터별 초정밀 용접 검사 (실시간 전수 검사)</h3>
+      <div class="grid-3">
+        <div class="info-card">
+          <h4 style="color: var(--accent);">원통형 배터리</h4>
+          <p>회전식(토셔널) 초음파 용접 설비에 200kHz 초고속 샘플링 모듈 적용</p>
+          <ul class="card-list">
+            <li>과용접 및 약용접 판별</li>
+            <li>이물 삽입 실시간 검출</li>
+            <li>발진 이상 징후 조기 포착</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4 style="color: var(--accent);">파우치형 배터리</h4>
+          <p>리드, 전극, 와인더 탭 등 얇은 박막을 접합하는 초음파 용접 공정 최적화</p>
+          <ul class="card-list">
+            <li>스텍(Stack) 및 앤빌(Anvil) 센서 부착</li>
+            <li>용접 컨트롤러 고장 감지</li>
+            <li>후발진 타이밍 오류 실시간 감지</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4 style="color: var(--accent);">레이저 용접</h4>
+          <p>비접촉식 레이저 용접 환경에 맞춘 플라즈마 센서 활용 분석</p>
+          <ul class="card-list">
+            <li>용접 중 발생하는 기포 검출</li>
+            <li>용접 강도 불량 (과용접/약용접) 정밀 판별</li>
+          </ul>
+        </div>
+      </div>
+
+      <h3 class="sub-title-left">02. 무중단 생산을 위한 핵심 공정 설비 예지 보전 (P/M)</h3>
+      <div class="grid-3">
+        <div class="info-card">
+          <h4>전해액 주입 (EL Filling) 설비</h4>
+          <p>32채널 대규모 다중 분석 시스템 도입, 전류/가속도 센서 동시 운용</p>
+          <ul class="card-list">
+            <li>서보 모터 고장 및 볼 스크류 베어링 파손 예측</li>
+            <li>정량 주입 담당 실린지 파손 사전 방지</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>비딩 (Beading) 설비 보호</h4>
+          <p>고속 회전하는 비딩 공정의 이상 징후를 진동 신호로 조기 탐지</p>
+          <ul class="card-list">
+            <li>블레이드 마모 및 파손 즉각 감지</li>
+            <li>스프링 이상 및 RPM 오류 탐지로 2차 치명적 파손 방어</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h4>고속 이송 설비 모니터링</h4>
+          <p>원통형 배터리가 쉴 새 없이 이동하는 컨베이어 및 물류 이송 시스템 진동 분석</p>
+          <ul class="card-list">
+            <li>RMS 및 주파수 변환 분석(FFT) 적용</li>
+            <li>물류 병목을 일으키는 기계적 고장 원천 차단</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer class="site-footer"><p>&copy; 2026 CM Co., Ltd. All rights reserved.</p></footer>
+
+  <script>
+    function switchTab(tabId, btnId) {
+      // 1. 모든 탭 컨텐츠 숨기기
+      document.querySelectorAll('.tab-content').forEach(function(content) {
+        content.classList.remove('active');
+      });
+      // 2. 모든 탭 메뉴 버튼 비활성화
+      document.querySelectorAll('#tab-menu a').forEach(function(btn) {
+        btn.classList.remove('active');
+      });
+      
+      // 3. 클릭한 대상 활성화
+      document.getElementById(tabId).classList.add('active');
+      document.getElementById(btnId).classList.add('active');
+      
+      // 4. 화면 상단으로 살짝 부드럽게 올려주기 (옵션)
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
 
   <main class="page-content container">
     <div class="section-head center">
