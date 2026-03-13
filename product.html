@@ -241,23 +241,24 @@
 
   <footer class="site-footer"><p>&copy; 2026 CM Co., Ltd. All rights reserved.</p></footer>
 
-  <script>
+ <script>
+    // 1. 탭(Tab) 전환 기능
     function switchTab(tabId, element) {
-      // 1. 모든 탭 컨텐츠 숨기기
+      // 모든 탭 컨텐츠 숨기기
       document.querySelectorAll('.tab-content').forEach(function(content) {
         content.classList.remove('active');
       });
-      // 2. 모든 탭 메뉴 버튼 비활성화
+      // 모든 탭 메뉴 버튼 비활성화
       document.querySelectorAll('#tab-menu a').forEach(function(btn) {
         btn.classList.remove('active');
       });
       
-      // 3. 클릭한 탭 메뉴와 내용만 활성화
+      // 클릭한 탭 메뉴와 내용만 활성화
       document.getElementById(tabId).classList.add('active');
       element.classList.add('active');
     }
- <script>
-    // 1. 모바일 햄버거 메뉴 열기/닫기
+
+    // 2. 모바일 햄버거 메뉴 열기/닫기
     const menuToggleBtn = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.site-nav');
     if(menuToggleBtn && navMenu) {
@@ -267,12 +268,14 @@
       });
     }
 
-    // 2. 페이지에 접속하자마자 무조건 맨 위(최상단)에서 시작하도록 강제 고정
+    // 3. 페이지에 접속하자마자 무조건 맨 위(최상단)에서 시작하도록 강제 고정
     window.addEventListener('pageshow', function() {
       setTimeout(function() {
         window.scrollTo({ top: 0, behavior: 'instant' });
       }, 10);
     });
   </script>
+</body>
+</html>
 </body>
 </html>
