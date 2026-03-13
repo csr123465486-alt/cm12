@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>제품소개 | 주식회사 씨엠</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a href="index.html" class="brand">
+        <img src="https://i.imgur.com/XkPSCm5.png" alt="주식회사 씨엠 로고" class="brand-logo-img">
+        <span class="brand-copy"><strong>주식회사 씨엠</strong><em>CM Co., Ltd.</em></span>
+      </a>
+      <nav class="site-nav">
+        <div class="nav-item"><a href="about.html">회사소개</a></div>
+        <div class="nav-item"><a href="product.html" class="active">제품소개</a>
+          <div class="dropdown">
+            <span style="display:block; padding: 5px 20px; font-size: 0.75rem; color: var(--accent); font-weight: 800;">H/W Module</span>
+            <a href="product.html#signal-lc">Signal LC</a>
+            <a href="product.html#signal-lx">Signal LX</a>
+            <a href="product.html#signal-hc">Signal HC</a>
+            <a href="product.html#signal-hx">Signal HX</a>
+            <div style="border-top: 1px solid #eee; margin: 5px 0;"></div>
+            <span style="display:block; padding: 5px 20px; font-size: 0.75rem; color: var(--accent); font-weight: 800;">S/W Solution</span>
+            <a href="product.html#innodq">InnoDQ</a>
+            <a href="product.html#innoad">Inno AD</a>
+            <a href="product.html#innopm">innoPM</a>
+            <a href="product.html#initool">Initool</a>
+          </div>
+        </div>
+        <div class="nav-item"><a href="industry.html">적용산업</a></div>
+        <div class="nav-item"><a href="contents.html">컨텐츠</a></div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page-content container">
+    
+    <div class="product-hero">
+      <h2>하드웨어와 소프트웨어의 완벽한 조화</h2>
+      <p>주식회사 씨엠의 솔루션은 공장 설비가 스스로 건강 상태를 진단하고 불량을 찾아낼 수 있도록 돕는 똑똑한 시스템입니다. 기계의 '감각 기관'과 '인공지능 두뇌'가 현장에서 어떻게 유기적으로 운영되는지 확인해 보세요.</p>
+    </div>
+
+    <div class="concept-grid">
+      <div class="concept-card">
+        <span class="concept-icon">📡</span>
+        <h3>현장의 소리와 떨림을 감지하는<br>'감각 기관'</h3>
+        <ul class="clean-list">
+          <li>초고속/정밀 기계신호 데이터 수집</li>
+          <li>가속도, 전류, 전압 등 다채널 센서 연동</li>
+          <li>노이즈 필터링 및 유효 신호 자동 추출</li>
+        </ul>
+      </div>
+      <div class="concept-card">
+        <span class="concept-icon">🧠</span>
+        <h3>데이터를 분석하고 판단하는<br>'인공지능 두뇌'</h3>
+        <ul class="clean-list">
+          <li>딥러닝 기반 실시간 제조 품질 이상 검출</li>
+          <li>미세 이상 징후 분석 및 설비 고장 예측</li>
+          <li>결과 시각화 대시보드 및 즉각적인 알람</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step-wrapper" style="margin-bottom: 0;">
+      <h3>스마트 예지보전 프로세스</h3>
+      <div class="step-container">
+        <div class="step-box">
+          <span class="step-num">STEP 01</span>
+          <h4>감지 및 수집 (H/W)</h4>
+          <p>현장 설비의 신호를 측정 모듈이 실시간으로 정밀하게 수집합니다.</p>
+        </div>
+        <div class="step-arrow">➔</div>
+        <div class="step-box">
+          <span class="step-num">STEP 02</span>
+          <h4>AI 분석 및 판단 (S/W)</h4>
+          <p>수집된 데이터를 AI 알고리즘이 분석하여 불량 및 고장 징후를 판별합니다.</p>
+        </div>
+        <div class="step-arrow">➔</div>
+        <div class="step-box">
+          <span class="step-num">STEP 03</span>
+          <h4>조치 및 관리 (S/W)</h4>
+          <p>관리자에게 알람을 제공하고 대시보드를 통해 설비 건강을 지속 관리합니다.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="site-footer"><p>&copy; 2026 CM Co., Ltd. All rights reserved.</p></footer>
+
+  <script>
+    document.querySelector('.menu-toggle').addEventListener('click', () => {
+      document.querySelector('.site-nav').classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
