@@ -280,26 +280,23 @@
 
   <footer class="site-footer"><p>&copy; 2026 CM Co., Ltd. All rights reserved.</p></footer>
 
-  <script>
-    function switchTab(tabId, element) {
-      document.querySelectorAll('.tab-content').forEach(function(content) {
-        content.classList.remove('active');
-      });
-      document.querySelectorAll('#tab-menu a').forEach(function(btn) {
-        btn.classList.remove('active');
-      });
-      
-      document.getElementById(tabId).classList.add('active');
-      element.classList.add('active');
-    }
-  <script>
+ <script>
+    // 1. 모바일 햄버거 메뉴 열기/닫기
     const menuToggleBtn = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.site-nav');
     if(menuToggleBtn && navMenu) {
-      menuToggleBtn.addEventListener('click', function() {
+      menuToggleBtn.addEventListener('click', function(e) {
         navMenu.classList.toggle('active');
+        e.stopPropagation(); // 터치 꼬임 방지
       });
     }
+
+    // 2. 페이지에 접속하자마자 무조건 맨 위(최상단)에서 시작하도록 강제 고정
+    window.addEventListener('pageshow', function() {
+      setTimeout(function() {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      }, 10);
+    });
   </script>
 </body>
 </html>
