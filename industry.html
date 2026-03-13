@@ -54,6 +54,9 @@
         <img src="https://i.imgur.com/XkPSCm5.png" alt="주식회사 씨엠 로고" class="brand-logo-img">
         <span class="brand-copy"><strong>주식회사 씨엠</strong><em>CM Co., Ltd.</em></span>
       </a>
+<button class="menu-toggle" aria-label="메뉴 열기">
+        <span></span><span></span><span></span>
+      </button>
       <nav class="site-nav">
         <div class="nav-item"><a href="about.html">회사소개</a></div>
         <div class="nav-item"><a href="product.html">제품소개</a></div>
@@ -321,5 +324,14 @@
   </main>
 
   <footer class="site-footer"><p>&copy; 2026 CM Co., Ltd. All rights reserved.</p></footer>
+<script>
+    const menuToggleBtn = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.site-nav');
+    if(menuToggleBtn && navMenu) {
+      menuToggleBtn.addEventListener('click', function() {
+        navMenu.classList.toggle('active');
+      });
+    }
+  </script>
 </body>
 </html>
