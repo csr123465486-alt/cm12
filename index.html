@@ -10,33 +10,40 @@
     .main-section { padding: 80px 0; }
     .bg-light { background-color: #f8f9fa; }
     
-    /* 🔥 1. 이미지 카드 공통 스타일 */
+    /* 🔥 타자 치듯 나타나는 애니메이션 (글자 개별 효과) */
+    .char-span {
+      opacity: 0; /* 처음에는 투명하게 숨김 */
+      transform: translateY(5px); /* 살짝 아래에 배치 */
+      display: inline-block;
+      transition: opacity 0.05s ease, transform 0.05s ease;
+    }
+    .char-span.visible {
+      opacity: 1; /* 차례대로 선명해짐 */
+      transform: translateY(0); /* 원래 위치로 올라옴 */
+    }
+
+    /* 이미지 카드 공통 스타일 (위/아래 사각형 사이즈 100% 강제 통일) */
     .image-card { 
       padding: 0; overflow: hidden; border: 1px solid #e5edf7; background: #fff; 
       border-radius: 15px; box-shadow: var(--shadow-light); 
       display: flex; flex-direction: column; text-decoration: none; color: inherit; 
       height: 420px; 
-      /* 3D 효과를 위한 설정 */
       transform-style: preserve-3d; 
       transition: box-shadow 0.3s, border-color 0.3s;
     }
-    /* JS에서 각도 조절을 하므로 CSS hover transform은 그림자와 테두리만 남깁니다 */
     .image-card:hover { box-shadow: 0 20px 40px rgba(0,86,179,0.15); border-color: var(--accent); z-index: 10; }
-    
     .image-wrap { width: 100%; height: 240px; flex-shrink: 0; overflow: hidden; border-bottom: 1px solid #e5edf7; background-color: #fff; }
     .image-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
     .image-card:hover .image-wrap img { transform: scale(1.05); }
-    
     .image-card-body { 
       padding: 0 20px; text-align: center; display: flex; flex-direction: column; 
       justify-content: center; height: 180px; flex-shrink: 0; 
-      /* 3D 효과 시 글씨가 살짝 튀어나와 보이게 하는 마법 */
       transform: translateZ(30px);
     }
     .image-card-body h4 { color: #111; font-size: 1.35rem; font-weight: 800; margin-bottom: 10px; word-break: keep-all; }
     .image-card-body p { color: #666; font-size: 0.95rem; line-height: 1.5; margin-bottom: 0; word-break: keep-all; }
 
-    /* CM TECHNOLOGY (6단계 카드) 스타일 */
+    /* CM TECHNOLOGY (6단계 카드 + 화살표 연결) 스타일 */
     .tech-flow-wrap { position: relative; }
     .tech-card::after { 
       content: '➔'; position: absolute; top: 50%; right: -25px; transform: translateY(-50%); 
@@ -64,10 +71,7 @@
     .logo-item img { max-width: 140px; max-height: 34px; object-fit: contain; filter: grayscale(100%); opacity: 0.7; transition: all 0.3s ease; }
     .logo-item:hover img { filter: grayscale(0%); opacity: 1; }
     
-    @keyframes marqueeMove {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
+    @keyframes marqueeMove { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
     /* 빠른 문의 배너 (CTA) */
     .cta-banner { background: linear-gradient(135deg, var(--accent) 0%, #003d82 100%); color: #fff; padding: 80px 5%; text-align: center; }
@@ -76,21 +80,17 @@
     .btn-white { display: inline-block; background: #fff; color: var(--accent); padding: 15px 40px; border-radius: 30px; font-weight: 800; font-size: 1.1rem; transition: transform 0.3s, box-shadow 0.3s; }
     .btn-white:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.2); }
     
-    /* 🔥 모바일 전용 (가로 스와이프 슬라이더 적용) */
+    /* 모바일 대응 */
     @media (max-width: 768px) {
       .main-section { padding: 50px 0; }
       
-      /* 모바일에서는 산업 카드가 가로로 스크롤(스와이프) 되도록 설정 */
       .mobile-slider { 
         display: flex !important; flex-wrap: nowrap; overflow-x: auto; 
         scroll-snap-type: x mandatory; gap: 15px !important; padding-bottom: 20px;
-        /* 스크롤바 숨기기 */
         -ms-overflow-style: none; scrollbar-width: none; 
       }
       .mobile-slider::-webkit-scrollbar { display: none; }
-      .mobile-slider .image-card { 
-        min-width: 85vw; scroll-snap-align: center; flex-shrink: 0; 
-      }
+      .mobile-slider .image-card { min-width: 85vw; scroll-snap-align: center; flex-shrink: 0; }
 
       .industry-logo-marquee { padding: 30px 0 50px 0; }
       .cta-banner { padding: 60px 5%; }
@@ -137,9 +137,9 @@
       <a href="about.html" class="hero-logo-mark">
         <img src="https://i.imgur.com/pm9J4PI.gif" alt="CM Main GIF Logo">
       </a>
-      <div class="hero-text-anim">
-        <h2>기계시스템의 고장 진단</h2>
-        <p>기계시스템의 유지보수는 고장 대응형에서 고장 예측형으로,<br>예방 조치에서 예지 보전으로 발전하고 있습니다.</p>
+      <div class="hero-text-anim" style="animation: none;">
+        <h2 class="type-effect" style="font-size: 2.8rem; font-weight: 800; margin-bottom: 15px; text-shadow: 0 4px 15px rgba(0,0,0,0.8);">기계시스템의 고장 진단</h2>
+        <p class="type-effect" style="font-size: 1.25rem; text-shadow: 0 2px 5px rgba(0,0,0,0.8); line-height: 1.6;">기계시스템의 유지보수는 고장 대응형에서 고장 예측형으로,<br>예방 조치에서 예지 보전으로 발전하고 있습니다.</p>
       </div>
     </div>
   </section>
@@ -147,8 +147,8 @@
   <section class="main-section container">
     <div class="section-head center">
       <span class="section-tag">WHY CHOOSE US</span>
-      <h2 class="main-title">씨엠을 선택해야 하는 이유</h2>
-      <p style="color: #666; font-size: 1.1rem; margin-top: 15px;">파편화된 기술이 아닌, 완벽하게 통합된 올인원(All-in-One) 솔루션입니다.</p>
+      <h2 class="main-title type-effect">씨엠을 선택해야 하는 이유</h2>
+      <p class="type-effect" style="color: #666; font-size: 1.1rem; margin-top: 15px;">파편화된 기술이 아닌, 완벽하게 통합된 올인원(All-in-One) 솔루션입니다.</p>
     </div>
     
     <div class="grid-3 mobile-slider">
@@ -180,7 +180,7 @@
     <div class="container">
       <div class="section-head center">
         <span class="section-tag">BUSINESS AREAS</span>
-        <h2 class="main-title">현장 맞춤형 적용 분야</h2>
+        <h2 class="main-title type-effect">현장 맞춤형 적용 분야</h2>
       </div>
       
       <div class="grid-3 mobile-slider">
@@ -238,9 +238,9 @@
   <section class="main-section container tech-flow-wrap">
     <div class="section-head center">
       <span class="section-tag">CM TECHNOLOGY</span>
-      <h2 class="main-title" style="margin-bottom: 10px;">AI 기반 산업 설비 신호 분석 플랫폼</h2>
-      <h3 style="color: var(--accent); font-weight: 800; font-size: 1.4rem; margin-bottom: 20px;">기계의 신호를 읽고 고장을 예측합니다.</h3>
-      <p style="color: #555; font-size: 1.1rem; line-height: 1.7; max-width: 800px; margin: 0 auto;">
+      <h2 class="main-title type-effect" style="margin-bottom: 10px;">AI 기반 산업 설비 신호 분석 플랫폼</h2>
+      <h3 class="type-effect" style="color: var(--accent); font-weight: 800; font-size: 1.4rem; margin-bottom: 20px;">기계의 신호를 읽고 고장을 예측합니다.</h3>
+      <p class="type-effect" style="color: #555; font-size: 1.1rem; line-height: 1.7; max-width: 800px; margin: 0 auto;">
         CM의 산업 AI 플랫폼은 센서 데이터 수집부터 AI 분석, 설비 진단, 공장 운영까지<br>
         제조 현장의 모든 데이터를 지능적으로 연결합니다.
       </p>
@@ -249,37 +249,37 @@
     <div class="grid-3">
       <div class="tech-card">
         <span class="step-badge">STEP 1</span>
-        <h4>산업 설비<br><span style="font-size:1rem; color:#888; font-weight:500;">(Industrial Machine)</span></h4>
+        <h4>산업 설비</h4>
         <p>제조 공장에서 작동하는 설비는 진동, 전류, 온도 등 다양한 물리 신호를 발생시킵니다. 이 신호 안에는 설비 상태와 품질 정보가 숨겨져 있습니다.</p>
         <div class="tech-points"><span>공장 자동화 라인</span><span>용접 설비</span><span>모터 및 구동계</span></div>
       </div>
       <div class="tech-card">
         <span class="step-badge">STEP 2</span>
-        <h4>센서 데이터 수집<br><span style="font-size:1rem; color:#888; font-weight:500;">(Sensor Layer)</span></h4>
+        <h4>센서 데이터 수집</h4>
         <p>CM 솔루션은 고정밀 산업용 센서를 통해 설비에서 발생하는 다양한 물리적 변화 신호를 지연 없이 실시간으로 수집합니다.</p>
         <div class="tech-points"><span>진동 및 전류 데이터</span><span>설비 회전 및 온도</span><span>비정상 음향 탐지</span></div>
       </div>
       <div class="tech-card">
         <span class="step-badge">STEP 3</span>
-        <h4>고속 데이터 수집 (DAQ)<br><span style="font-size:1rem; color:#888; font-weight:500;">(Data Acquisition)</span></h4>
+        <h4>고속 데이터 수집 (DAQ)</h4>
         <p>수집된 신호는 CM의 독자적인 고속 DAQ 장치로 처리됩니다. 초고속 샘플링을 통해 찰나의 미세한 이상 신호까지 정확히 포착합니다.</p>
         <div class="tech-points"><span>200kHz 초고속 샘플링</span><span>현장 노이즈 필터링</span><span>초정밀 신호 전처리</span></div>
       </div>
       <div class="tech-card">
         <span class="step-badge">STEP 4</span>
-        <h4>Edge AI 분석<br><span style="font-size:1rem; color:#888; font-weight:500;">(AI Signal Analysis)</span></h4>
+        <h4>Edge AI 분석</h4>
         <p>정제된 신호 데이터는 현장의 Edge AI 엔진을 통해 실시간으로 분석됩니다. AI가 정상 패턴을 학습하여 미세한 결함을 자동으로 탐지합니다.</p>
         <div class="tech-points"><span>Auto-Trigger 신호 분석</span><span>지능형 패턴 인식 알고리즘</span><span>실시간 딥러닝 병렬 처리</span></div>
       </div>
       <div class="tech-card">
         <span class="step-badge">STEP 5</span>
-        <h4>이상 탐지 및 예측<br><span style="font-size:1rem; color:#888; font-weight:500;">(Fault Detection)</span></h4>
+        <h4>이상 탐지 및 예측</h4>
         <p>AI 분석 결과를 기반으로 설비의 이상 상태를 즉각 탐지합니다. 치명적인 고장이 발생하기 이전에 예지 보전(P/M)을 가능하게 합니다.</p>
         <div class="tech-points"><span>예기치 않은 다운타임 방지</span><span>대량 불량품 발생 원천 차단</span><span>전체 공정 수율 및 품질 향상</span></div>
       </div>
       <div class="tech-card">
         <span class="step-badge">STEP 6</span>
-        <h4>스마트 공장 운영<br><span style="font-size:1rem; color:#888; font-weight:500;">(Factory Platform)</span></h4>
+        <h4>스마트 공장 운영</h4>
         <p>모든 분석 결과는 관리자의 실시간 대시보드로 즉각 제공됩니다. 설비 상태를 직관적으로 모니터링하고 이상 발생 시 즉시 제어합니다.</p>
         <div class="tech-points"><span>실시간 가시성 통합 대시보드</span><span>치명적 결함 알람 및 인터록 제어</span><span>유지보수 자동화 데이터 리포트</span></div>
       </div>
@@ -323,41 +323,72 @@
       }
     });
 
-    // 🔥 3. 데스크탑 3D 틸트(Hover) 효과 자바스크립트
-    // (마우스를 올렸을 때 마우스 위치에 따라 카드가 입체적으로 기웁니다)
+    // 3. 데스크탑 3D 틸트(Hover) 효과
     const tiltCards = document.querySelectorAll('.tilt-card');
-    
-    // 모바일 기기가 아닐 때만 3D 효과 작동 (성능 최적화)
     if (window.innerWidth > 768) {
       tiltCards.forEach(card => {
         card.addEventListener('mousemove', e => {
           const rect = card.getBoundingClientRect();
-          const x = e.clientX - rect.left; // 카드 내 마우스 X 좌표
-          const y = e.clientY - rect.top;  // 카드 내 마우스 Y 좌표
-          
+          const x = e.clientX - rect.left; 
+          const y = e.clientY - rect.top;  
           const centerX = rect.width / 2;
           const centerY = rect.height / 2;
-          
-          // 회전 각도 계산 (가운데를 기준으로 최대 8도까지 꺾임)
           const rotateX = ((y - centerY) / centerY) * -8;
           const rotateY = ((x - centerX) / centerX) * 8;
-          
-          // CSS 3D 변형 적용
           card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
         });
-
-        // 마우스가 떠나면 원래대로 복구
         card.addEventListener('mouseleave', () => {
           card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
           card.style.transition = 'transform 0.5s ease, box-shadow 0.3s ease';
         });
-
-        // 마우스가 들어올 때 부드럽게 시작
         card.addEventListener('mouseenter', () => {
           card.style.transition = 'transform 0.1s ease-out, box-shadow 0.3s ease';
         });
       });
     }
+
+    // 🔥 4. 타자기(Typewriter) 텍스트 등장 애니메이션
+    const typeTargets = document.querySelectorAll('.type-effect');
+    
+    // 텍스트를 글자 단위 <span>으로 쪼개기
+    typeTargets.forEach(target => {
+      let newContent = '';
+      const childNodes = Array.from(target.childNodes);
+      childNodes.forEach(node => {
+        if (node.nodeType === 3) { // 텍스트 노드일 때
+          const text = node.nodeValue;
+          for (let i = 0; i < text.length; i++) {
+            if(text[i] === ' ') {
+              newContent += `<span class="char-span" style="white-space: pre;"> </span>`; // 공백 유지
+            } else {
+              newContent += `<span class="char-span">${text[i]}</span>`; // 일반 글자
+            }
+          }
+        } else if (node.nodeName === 'BR') {
+          newContent += '<br>'; // 줄바꿈 유지
+        } else {
+          newContent += node.outerHTML; // 기타 태그 유지
+        }
+      });
+      target.innerHTML = newContent;
+    });
+
+    // 화면에 나타나면 순차적으로 글자를 보여주는 감지기(Observer)
+    const typeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const spans = entry.target.querySelectorAll('.char-span');
+          spans.forEach((span, index) => {
+            // 글자 하나당 30ms 간격으로 나타나게 조절
+            setTimeout(() => { span.classList.add('visible'); }, index * 30);
+          });
+          typeObserver.unobserve(entry.target); // 한 번 실행 후 종료
+        }
+      });
+    }, { threshold: 0.2 }); // 화면에 20% 보일 때 발동
+
+    // 쪼개놓은 글자들을 관찰 시작
+    typeTargets.forEach(target => typeObserver.observe(target));
   </script>
 </body>
 </html>
