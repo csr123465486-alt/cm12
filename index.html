@@ -10,22 +10,17 @@
     .main-section { padding: 80px 0; }
     .bg-light { background-color: #f8f9fa; }
     
-    /* 신뢰의 띠 */
-    .trust-banner { display: flex; justify-content: center; align-items: center; gap: 50px; flex-wrap: wrap; padding: 40px 5%; background: #fff; border-bottom: 1px solid #eee; }
-    .trust-item { font-size: 1.2rem; font-weight: 800; color: #cbd2d9; letter-spacing: 1px; transition: color 0.3s; cursor: default; }
-    .trust-item:hover { color: var(--accent); }
+    /* 1. 이미지 카드 공통 스타일 (핵심 가치 & 산업 갤러리 모두 사용) */
+    .image-card { padding: 0; overflow: hidden; border: 1px solid #eee; background: #fff; border-radius: 15px; box-shadow: var(--shadow-light); transition: 0.3s; display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+    .image-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); border-color: var(--accent); }
+    .image-wrap { width: 100%; height: 220px; overflow: hidden; border-bottom: 1px solid #eee; background-color: #fcfcfc; }
+    .image-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .image-card:hover .image-wrap img { transform: scale(1.05); }
+    .image-card-body { padding: 30px; text-align: center; display: flex; flex-direction: column; flex-grow: 1; }
+    .image-card-body h4 { color: #111; font-size: 1.35rem; font-weight: 800; margin-bottom: 15px; word-break: keep-all; }
+    .image-card-body p { color: #666; font-size: 0.95rem; line-height: 1.6; margin-bottom: 0; word-break: keep-all; }
     
-    /* 산업 갤러리 카드 */
-    .industry-card { padding: 0; overflow: hidden; border: none; background: #fff; border-radius: 15px; box-shadow: var(--shadow-light); transition: 0.3s; display: block; }
-    .industry-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
-    .industry-img-wrap { width: 100%; height: 220px; overflow: hidden; }
-    .industry-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
-    .industry-card:hover .industry-img-wrap img { transform: scale(1.05); }
-    .industry-card-body { padding: 30px; text-align: center; }
-    .industry-card-body h4 { color: #111; font-size: 1.3rem; font-weight: 800; margin-bottom: 10px; }
-    .industry-card-body p { color: #666; font-size: 0.95rem; line-height: 1.5; margin-bottom: 0; }
-    
-    /* 빠른 문의 배너 (CTA) */
+    /* 2. 빠른 문의 배너 (CTA) */
     .cta-banner { background: linear-gradient(135deg, var(--accent) 0%, #003d82 100%); color: #fff; padding: 80px 5%; text-align: center; }
     .cta-banner h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 20px; color: #fff; }
     .cta-banner p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 40px; }
@@ -35,11 +30,12 @@
     /* 모바일 대응 */
     @media (max-width: 768px) {
       .main-section { padding: 50px 0; }
-      .trust-banner { gap: 20px; padding: 30px 5%; }
-      .trust-item { font-size: 0.95rem; }
       .cta-banner { padding: 60px 5%; }
       .cta-banner h2 { font-size: 1.6rem; }
       .btn-white { font-size: 1rem; padding: 12px 30px; }
+      .image-wrap { height: 200px; }
+      .image-card-body { padding: 25px 20px; }
+      .image-card-body h4 { font-size: 1.25rem; }
     }
   </style>
 </head>
@@ -84,35 +80,34 @@
     </div>
   </section>
 
-  <div class="trust-banner">
-    <span class="trust-item">ISO 9001</span>
-    <span class="trust-item">ISO 14001</span>
-    <span class="trust-item">Inno-Biz 인증</span>
-    <span class="trust-item">KC 인증</span>
-    <span class="trust-item">CE 인증</span>
-  </div>
-
   <section class="main-section container">
     <div class="section-head center">
       <span class="section-tag">WHY CHOOSE US</span>
       <h2 class="main-title">씨엠을 선택해야 하는 이유</h2>
       <p style="color: #666; font-size: 1.1rem; margin-top: 15px;">파편화된 기술이 아닌, 완벽하게 통합된 올인원(All-in-One) 솔루션입니다.</p>
     </div>
+    
     <div class="grid-3">
-      <div class="info-card" style="text-align: center;">
-        <span style="font-size: 2.5rem; display: block; margin-bottom: 15px;">📡</span>
-        <h4 style="color: #111;">독자적 H/W 설계</h4>
-        <p>최대 200kHz 초고속 샘플링 모듈과 극한의 현장 환경을 견디는 강력한 내구성</p>
+      <div class="image-card">
+        <div class="image-wrap"><img src="https://i.imgur.com/IMWv841.jpeg" alt="독자적 H/W 설계"></div>
+        <div class="image-card-body">
+          <h4>독자적 H/W 설계</h4>
+          <p>최대 200kHz 초고속 샘플링 모듈과 극한의 현장 환경을 견디는 강력한 내구성</p>
+        </div>
       </div>
-      <div class="info-card" style="text-align: center;">
-        <span style="font-size: 2.5rem; display: block; margin-bottom: 15px;">🧠</span>
-        <h4 style="color: #111;">실시간 AI 분석</h4>
-        <p>단 1시간의 자율 학습만으로 설비의 미세한 이상 징후와 불량을 즉각 판별</p>
+      <div class="image-card">
+        <div class="image-wrap"><img src="https://i.imgur.com/5uMryPI.png" alt="실시간 AI 분석"></div>
+        <div class="image-card-body">
+          <h4>실시간 AI 분석</h4>
+          <p>단 1시간의 자율 학습만으로 설비의 미세한 이상 징후와 불량을 즉각 판별</p>
+        </div>
       </div>
-      <div class="info-card" style="text-align: center;">
-        <span style="font-size: 2.5rem; display: block; margin-bottom: 15px;">⚙️</span>
-        <h4 style="color: #111;">완벽한 수직 계열화</h4>
-        <p>현장 센싱부터 시각화 대시보드, 인터록 제어까지 지연 없는 통합 아키텍처 제공</p>
+      <div class="image-card">
+        <div class="image-wrap"><img src="https://i.imgur.com/VkwOsd1.jpeg" alt="완벽한 수직 계열화"></div>
+        <div class="image-card-body">
+          <h4>완벽한 수직 계열화</h4>
+          <p>현장 센싱부터 시각화 대시보드, 인터록 제어까지 지연 없는 통합 아키텍처 제공</p>
+        </div>
       </div>
     </div>
   </section>
@@ -123,18 +118,28 @@
         <span class="section-tag">BUSINESS AREAS</span>
         <h2 class="main-title">현장 맞춤형 적용 분야</h2>
       </div>
+      
       <div class="grid-3">
-        <a href="industry.html" class="industry-card">
-          <div class="industry-img-wrap"><img src="https://images.unsplash.com/photo-1563720225384-9c0f1b51e944?auto=format&fit=crop&w=600&q=80" alt="자동차 산업"></div>
-          <div class="industry-card-body"><h4>자동차 산업</h4><p>차체 용접 불량 검출 및 모터 조립 검사</p></div>
+        <a href="industry.html" class="image-card">
+          <div class="image-wrap"><img src="https://i.imgur.com/ME4TZhs.jpeg" alt="자동차 산업"></div>
+          <div class="image-card-body">
+            <h4>자동차 산업</h4>
+            <p>차체 용접 불량 검출 및 모터 조립 검사</p>
+          </div>
         </a>
-        <a href="industry.html" class="industry-card">
-          <div class="industry-img-wrap"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=600&q=80" alt="중공업 및 조선 산업"></div>
-          <div class="industry-card-body"><h4>중공업·조선 산업</h4><p>대형 구조물 아크 용접 심층 결함 탐지</p></div>
+        <a href="industry.html" class="image-card">
+          <div class="image-wrap"><img src="https://i.imgur.com/LT8vVlh.jpeg" alt="중공업 및 조선 산업"></div>
+          <div class="image-card-body">
+            <h4>중공업·조선 산업</h4>
+            <p>대형 구조물 아크 용접 심층 결함 탐지</p>
+          </div>
         </a>
-        <a href="industry.html" class="industry-card">
-          <div class="industry-img-wrap"><img src="https://images.unsplash.com/photo-1620501534394-436f5b9d3658?auto=format&fit=crop&w=600&q=80" alt="2차 전지 산업"></div>
-          <div class="industry-card-body"><h4>2차 전지 산업</h4><p>배터리 초정밀 용접 검사 및 예지 보전</p></div>
+        <a href="industry.html" class="image-card">
+          <div class="image-wrap"><img src="https://i.imgur.com/IQiK4Qs.jpeg" alt="2차 전지 산업"></div>
+          <div class="image-card-body">
+            <h4>2차 전지 산업</h4>
+            <p>배터리 초정밀 용접 검사 및 예지 보전</p>
+          </div>
         </a>
       </div>
     </div>
@@ -151,6 +156,7 @@
   <footer class="site-footer" style="margin-top: 0; border-top: none;"><p>&copy; 2026 CM Co., Ltd. All rights reserved.</p></footer>
 
   <script>
+    // 모바일 햄버거 메뉴 동작
     const menuToggleBtn = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.site-nav');
     if(menuToggleBtn && navMenu) {
@@ -160,6 +166,7 @@
       });
     }
 
+    // 모바일 비디오 강제 재생 트릭
     document.addEventListener("DOMContentLoaded", function() {
       const video = document.getElementById('bg-video');
       if (video) {

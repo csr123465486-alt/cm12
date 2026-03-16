@@ -5,6 +5,34 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>제품소개 | 주식회사 씨엠</title>
   <link rel="stylesheet" href="style.css">
+  
+  <style>
+    /* 제품소개 전용 배너 및 이미지 스타일 */
+    .img-banner { width: 100%; height: 350px; border-radius: 20px; overflow: hidden; margin-bottom: 40px; box-shadow: var(--shadow-light); }
+    .img-banner img { width: 100%; height: 100%; object-fit: cover; }
+    .rounded-img-wrap { border-radius: 15px; overflow: hidden; box-shadow: var(--shadow-light); height: 100%; min-height: 300px; }
+    .rounded-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* 번호가 매겨진 스텝 리스트 (아키텍처 용) */
+    .arch-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 15px; }
+    .arch-list li { background: #fff; border: 1px solid #eee; padding: 25px; border-radius: 15px; box-shadow: var(--shadow-light); display: flex; flex-direction: column; }
+    .arch-list li strong { color: var(--accent); font-size: 1.2rem; margin-bottom: 8px; font-weight: 800; display: block; }
+    .arch-list li p { color: #555; margin: 0; font-size: 1rem; line-height: 1.5; word-break: keep-all; }
+
+    /* 기술 적용 흐름 다이어그램 (7단계) */
+    .tech-flow-container { display: flex; justify-content: space-between; align-items: center; background: #fdfdfd; padding: 30px; border-radius: 15px; box-shadow: var(--shadow-light); border: 1px solid var(--card-border); margin-bottom: 50px; flex-wrap: wrap; gap: 5px; }
+    .flow-step { text-align: center; flex: 1; min-width: 90px; padding: 10px 5px; position: relative; }
+    .flow-icon { font-size: 2rem; display: block; margin-bottom: 10px; }
+    .flow-step h5 { font-size: 0.95rem; color: #111; font-weight: 800; word-break: keep-all; line-height: 1.3; }
+    .flow-arrow { font-size: 1.2rem; color: var(--accent); font-weight: bold; }
+
+    @media (max-width: 992px) {
+      .grid-3, .grid-2, .split-grid { grid-template-columns: 1fr; }
+      .tech-flow-container { flex-direction: column; gap: 10px; padding: 20px; }
+      .flow-arrow { transform: rotate(90deg); margin: 2px auto; }
+      .rounded-img-wrap { min-height: 250px; margin-top: 20px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -39,67 +67,145 @@
     </div>
 
     <div id="tab-1" class="tab-content active">
+      
       <div class="intro-quote">
         <h3>"하드웨어의 정밀함과 소프트웨어의 통찰력이 만나,<br>제조 현장의 무결점을 완성합니다."</h3>
-        <p>주식회사 씨엠의 AI 스마트 제조 솔루션은 비정형 신호를 초고속으로 수집하고, AI가 실시간 분석하는 <strong>올인원(All-in-One) 시스템</strong>입니다. 데이터 수집부터 분석까지 완벽하게 통합된 아키텍처를 제공하여 압도적인 처리 속도와 정확도를 자랑합니다.</p>
+        <p>주식회사 씨엠의 AI 스마트 제조 솔루션은 파편화된 기술을 억지로 조합한 것이 아닙니다. 데이터 수집(H/W)부터 분석, 운영 및 제어(S/W)까지 <strong>완전히 통합된 산업 AI 플랫폼</strong>을 제공하여 타사 대비 압도적인 처리 속도와 분석 정확도를 자랑합니다.</p>
       </div>
 
-      <h3 class="sub-title">💡 솔루션 도입의 핵심 가치 (Core Value)</h3>
-      <div class="grid-3">
-        <div class="info-card">
-          <h4>01. 예지 보전의 실현</h4>
-          <p>미세한 이상 징후를 먼저 파악하여 <strong>다운타임(Downtime)을 제로화</strong>하고 부품 교체 시기를 최적화합니다.</p>
+      <h3 class="sub-title-left">🔄 CM 기술 적용 흐름 (Data Pipeline)</h3>
+      <p style="color: #666; margin-bottom: 20px; font-size: 1.05rem;">설비 데이터가 수집되어 공장 운영으로 직결되는 완벽한 7단계 파이프라인입니다.</p>
+      <div class="tech-flow-container">
+        <div class="flow-step"><span class="flow-icon">🏭</span><h5>산업 설비</h5></div>
+        <div class="flow-arrow">➔</div>
+        <div class="flow-step"><span class="flow-icon">📡</span><h5>센서 데이터 수집</h5></div>
+        <div class="flow-arrow">➔</div>
+        <div class="flow-step"><span class="flow-icon">⚡</span><h5>DAQ 모듈<br>고속 샘플링</h5></div>
+        <div class="flow-arrow">➔</div>
+        <div class="flow-step"><span class="flow-icon">🧠</span><h5>AI 신호 분석</h5></div>
+        <div class="flow-arrow">➔</div>
+        <div class="flow-step"><span class="flow-icon">🔍</span><h5>이상 탐지</h5></div>
+        <div class="flow-arrow">➔</div>
+        <div class="flow-step"><span class="flow-icon">🩺</span><h5>설비 상태 진단</h5></div>
+        <div class="flow-arrow">➔</div>
+        <div class="flow-step"><span class="flow-icon">🖥️</span><h5>스마트 공장 운영</h5></div>
+      </div>
+
+      <h3 class="sub-title-left" style="margin-top: 60px;">🏗️ AI 스마트 팩토리 아키텍처 (Architecture)</h3>
+      <div class="split-grid">
+        <div>
+          <ul class="arch-list">
+            <li>
+              <strong>1️⃣ Sensor Layer</strong>
+              <p>산업 설비에 설치된 센서가 진동, 전류, 온도, 회전 등 다양한 데이터를 실시간으로 수집합니다.</p>
+            </li>
+            <li>
+              <strong>2️⃣ Edge Data Acquisition</strong>
+              <p>자체 개발한 DAQ 모듈이 고속 샘플링, 하드웨어 노이즈 제거, 데이터 전처리를 현장(Edge)에서 즉각 수행합니다.</p>
+            </li>
+            <li>
+              <strong>3️⃣ AI Signal Analysis</strong>
+              <p>수집된 정밀 데이터를 바탕으로 AI 알고리즘이 패턴 분석, 이상 탐지, 고장 예측을 수행합니다.</p>
+            </li>
+            <li>
+              <strong>4️⃣ Factory Operation Platform</strong>
+              <p>운영 시스템을 통해 실시간 알람, 데일리 리포트, 공정 관리 대시보드를 관리자에게 제공합니다.</p>
+            </li>
+          </ul>
         </div>
-        <div class="info-card">
-          <h4>02. 실시간 불량 검출</h4>
-          <p>찰나의 순간에 이루어지는 공정에서도 100% 전수 검사에 준하는 실시간 모니터링으로 <strong>불량품 유출을 원천 차단</strong>합니다.</p>
-        </div>
-        <div class="info-card">
-          <h4>03. 데이터 기반 의사결정</h4>
-          <p>작업자의 감에 의존하던 방식을 탈피, 모든 기계의 상태를 <strong>디지털 데이터로 변환</strong>하여 과학적인 공장 관리를 가능하게 합니다.</p>
+        <div class="rounded-img-wrap" style="height: 100%;">
+          <img src="https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=800&q=80" alt="Industrial AI Architecture Diagram">
         </div>
       </div>
+
     </div>
 
     <div id="tab-2" class="tab-content">
+      
       <div class="intro-quote">
         <h3>"가장 가혹한 산업 현장에서도<br>왜곡 없는 순수한 데이터를 추출합니다."</h3>
+        <p>AI 분석의 정확도는 결국 입력되는 데이터의 품질에 좌우됩니다. CM의 하드웨어 라인업은 극심한 노이즈 속에서도 기계 본연의 신호를 정밀하게 획득할 수 있도록 <strong>현장 맞춤형 산업 장비</strong>로 특화 설계되었습니다.</p>
       </div>
-      <h3 class="sub-title-left">01. 다차원 멀티 센서 지원 (Multi-Sensor)</h3>
+
+      <h3 class="sub-title-left">01. 산업 환경 완벽 대응 설계</h3>
+      <div class="split-grid" style="align-items: stretch; margin-bottom: 60px;">
+        <div class="info-card" style="margin-bottom: 0;">
+          <p style="font-size: 1.1rem; color: #444; margin-bottom: 20px;">CM의 하드웨어는 온화한 일반 실험실 장비가 아닙니다. 극한의 제조 현장에서 완벽하게 버티는 진정한 산업 장비입니다.</p>
+          <ul class="card-list" style="font-size: 1.05rem;">
+            <li><strong>고온 환경 대응:</strong> 설비 자체의 발열에도 성능 저하 없는 방열 설계</li>
+            <li><strong>강한 전자기 노이즈 차폐:</strong> 용접 및 대형 모터 등 EMI 쉴딩 완벽 적용</li>
+            <li><strong>먼지 및 분진 대응:</strong> 쇳가루나 절삭유가 날리는 현장을 위한 방진/방수 처리</li>
+            <li><strong>24시간 연속 운용:</strong> 멈추지 않는 공장 라인을 위한 내구성과 안정성 확보</li>
+          </ul>
+        </div>
+        <div class="rounded-img-wrap" style="margin-bottom: 0;">
+          <img src="https://images.unsplash.com/photo-1581092335397-9583eb92d232?auto=format&fit=crop&w=800&q=80" alt="Industrial vibration sensor mounted on motor">
+        </div>
+      </div>
+
+      <h3 class="sub-title-left">02. 확장 가능한 다차원 센서 구조</h3>
+      <p style="margin-bottom: 20px; font-size: 1.1rem; color: #555;">단일 센서의 한계를 넘어, 다양한 센서를 통합 연결하여 설비를 다각도로 분석합니다.</p>
       <div class="grid-3">
-        <div class="info-card"><h4>가속도 센서 (진동)</h4><p>베어링 마모, 구동축 이상, 기어박스 결함 정밀 감지</p></div>
-        <div class="info-card"><h4>전류/전압 센서</h4><p>아크 용접 시의 전압 강하, 모터 부하 과부하 등 모니터링</p></div>
-        <div class="info-card"><h4>변위 센서</h4><p>정밀 가공 기기의 미세한 위치 틀어짐 및 변형 측정</p></div>
-      </div>
-      <h3 class="sub-title-left">02. 자체 개발 신호 측정 모듈 (DAQ)</h3>
-      <div class="grid-2">
-        <div class="info-card">
-          <h4 style="color:#111;">[초고속] Signal HX 시리즈</h4>
-          <p>최대 200kHz/ch의 압도적인 샘플링으로 고주파 진동 완벽 포착 (1~32채널)</p>
+        <div class="white-card" style="padding: 25px 20px; text-align: center;">
+          <h4 style="color:#111;">가속도 센서 (진동)</h4><p>베어링 마모, 구동축 이상 정밀 감지</p>
         </div>
-        <div class="info-card">
-          <h4 style="color:#111;">[범용] Signal HC 시리즈</h4>
-          <p>10~20kHz/ch 안정적 샘플링으로 컨베이어 벨트 등 상시 예지 보전 최적화</p>
+        <div class="white-card" style="padding: 25px 20px; text-align: center;">
+          <h4 style="color:#111;">전류/전압 센서</h4><p>아크 용접 전압 강하, 과부하 모니터링</p>
+        </div>
+        <div class="white-card" style="padding: 25px 20px; text-align: center;">
+          <h4 style="color:#111;">음향/온도 센서</h4><p>비정상 소음 및 과열 징후 통합 감지</p>
         </div>
       </div>
+
+      <h3 class="sub-title-left" style="margin-top: 40px;">03. 기존 생산 설비와의 호환성</h3>
+      <div class="info-card">
+        <p style="font-size: 1.1rem; margin-bottom: 15px;">기존 라인을 멈추거나 시스템을 전면 교체할 필요가 없습니다. CM DAQ 시스템은 유연하게 연동됩니다.</p>
+        <ul class="card-list" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+          <li><strong>PLC 연동:</strong> 인터록 제어 및 실시간 통신 지원</li>
+          <li><strong>산업용 네트워크:</strong> 공장 내 통신 프로토콜 완벽 호환</li>
+          <li><strong>기존 센서 재활용:</strong> 이미 설치된 센서 데이터 통합 수집</li>
+        </ul>
+      </div>
+
     </div>
 
     <div id="tab-3" class="tab-content">
-      <div class="intro-quote">
-        <h3>"데이터를 넘어 해답을 제시합니다.<br>1시간의 학습으로 완성되는 스마트 팩토리."</h3>
+      
+      <div class="img-banner">
+        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80" alt="Smart Factory Analytics Dashboard UI">
       </div>
-      <h3 class="sub-title-left">01. 독보적인 AI 신호 처리 및 분석 알고리즘</h3>
-      <div class="grid-3">
-        <div class="info-card"><h4>초고속 자율 학습</h4><p>설비 가동 후 <strong>단 1시간 이내</strong>에 AI가 기계의 정상 패턴을 스스로 학습합니다.</p></div>
-        <div class="info-card"><h4>정밀 주파수 및 RMS</h4><p>FFT 및 실효값 분석을 동시 수행하여, 복합적인 고장 원인을 정확하게 역추적합니다.</p></div>
-        <div class="info-card"><h4>동적 노이즈 필터링</h4><p>기계 작동과 무관한 주변 백색 소음을 AI가 실시간으로 분류/제거합니다.</p></div>
+
+      <div class="intro-quote" style="margin-top: -20px;">
+        <h3>"데이터를 넘어 운영의 해답을 제시하는<br>스마트 공장 운영 플랫폼."</h3>
+        <p>CM 소프트웨어는 단순한 데이터 분석 툴이 아닙니다. AI 기반의 통찰력을 시각화하여, 현장 관리자가 전체 공정을 손쉽게 관리할 수 있도록 돕는 <strong>통합 산업 AI 플랫폼</strong>입니다.</p>
       </div>
-      <h3 class="sub-title-left">02. 자율 운영 및 관리자 지원 시스템</h3>
+
+      <h3 class="sub-title-left">01. 스마트 공장 운영 플랫폼 (Operation Dashboard)</h3>
       <div class="grid-2">
-        <div class="info-card"><h4>🚨 스마트 알람 및 인터록</h4><p>치명적 결함 감지 시 해당 설비를 즉시 정지시키고 스마트폰으로 원인을 전송합니다.</p></div>
-        <div class="info-card"><h4>📑 자동화 데일리 리포트</h4><p>매일의 설비 상태, 알람 내역을 리포트로 자동 생성하여 유지보수 계획 수립을 돕습니다.</p></div>
+        <div class="info-card">
+          <h4 style="color: var(--accent); font-size: 1.4rem;">실시간 설비 모니터링</h4>
+          <p>운영자는 직관적인 다크/라이트 톤의 대시보드를 통해 <strong>현재 설비의 가동 상태, 채널별 진동 파형, 이상 알람</strong>을 딜레이 없이 실시간으로 한눈에 파악할 수 있습니다.</p>
+        </div>
+        <div class="info-card">
+          <h4 style="color: var(--accent); font-size: 1.4rem;">스마트 리포트 시스템</h4>
+          <p>별도의 수작업 없이 시스템이 자동으로 <strong>설비 상태 종합 보고서, 이상 발생 및 조치 기록, 정기 유지보수 리포트</strong>를 매일 생성하여 관리 업무를 대폭 단축시킵니다.</p>
+        </div>
       </div>
+
+      <h3 class="sub-title-left" style="margin-top: 60px;">02. 독보적인 AI 신호 분석 및 예방</h3>
+      <div class="grid-2">
+        <div class="info-card">
+          <h4 style="color: #111; font-size: 1.3rem;">정밀한 AI 이상 탐지</h4>
+          <p>AI 알고리즘이 1시간 만에 정상 패턴을 딥러닝으로 학습합니다. 이후 유입되는 데이터에서 <strong>진동 패턴의 미세한 튀는 현상, 이상 주파수 대역 증가, 장비 부하 변화</strong>를 포착하여 불량과 고장을 조기에 탐지해 냅니다.</p>
+        </div>
+        <div class="info-card">
+          <h4 style="color: #111; font-size: 1.3rem;">예지 보전 관리 (Predictive Maintenance)</h4>
+          <p>단순히 고장 났을 때 알람을 울리는 것이 아닙니다. AI 분석 결과를 기반으로 <strong>부품의 잔여 수명과 교체 시기 예측, 최적의 유지보수(P/M) 일정 관리</strong>를 제안하여 다운타임 제로(0)를 실현합니다.</p>
+        </div>
+      </div>
+      
     </div>
+
   </main>
 
   <footer class="site-footer"><p>&copy; 2026 CM Co., Ltd. All rights reserved.</p></footer>
