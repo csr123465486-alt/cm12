@@ -10,7 +10,7 @@
     .main-section { padding: 80px 0; }
     .bg-light { background-color: #f8f9fa; }
     
-    /* 1. 이미지 카드 공통 스타일 (핵심 가치 & 산업 갤러리 모두 사용) */
+    /* 이미지 카드 공통 스타일 */
     .image-card { padding: 0; overflow: hidden; border: 1px solid #eee; background: #fff; border-radius: 15px; box-shadow: var(--shadow-light); transition: 0.3s; display: flex; flex-direction: column; text-decoration: none; color: inherit; }
     .image-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); border-color: var(--accent); }
     .image-wrap { width: 100%; height: 220px; overflow: hidden; border-bottom: 1px solid #eee; background-color: #fcfcfc; }
@@ -20,7 +20,24 @@
     .image-card-body h4 { color: #111; font-size: 1.35rem; font-weight: 800; margin-bottom: 15px; word-break: keep-all; }
     .image-card-body p { color: #666; font-size: 0.95rem; line-height: 1.6; margin-bottom: 0; word-break: keep-all; }
     
-    /* 2. 빠른 문의 배너 (CTA) */
+    /* 🔥 무한 롤링 파트너사 (텍스트 제거 및 간격 최적화) */
+    .industry-logo-marquee { padding: 0 0 80px 0; background: #f8f9fa; }
+    .logo-marquee { position: relative; overflow: hidden; width: 100%; mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); }
+    .logo-track { display: flex; width: max-content; gap: 18px; animation: marqueeMove 30s linear infinite; }
+    .logo-marquee:hover .logo-track { animation-play-state: paused; }
+    .logo-item { min-width: 220px; height: 84px; padding: 0 28px; display: flex; align-items: center; justify-content: center; background: white; border: 1px solid #e5edf7; border-radius: 15px; box-shadow: 0 10px 25px rgba(26, 53, 86, 0.04); font-size: 1.1rem; font-weight: 800; color: #2f5d8a; letter-spacing: 0.04em; white-space: nowrap; transition: 0.3s; }
+    .logo-item:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(26, 53, 86, 0.08); border-color: var(--accent); }
+    
+    /* 추후 로고 이미지 적용 시 효과 */
+    .logo-item img { max-width: 140px; max-height: 34px; object-fit: contain; filter: grayscale(100%); opacity: 0.7; transition: all 0.3s ease; }
+    .logo-item:hover img { filter: grayscale(0%); opacity: 1; }
+    
+    @keyframes marqueeMove {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* 빠른 문의 배너 (CTA) */
     .cta-banner { background: linear-gradient(135deg, var(--accent) 0%, #003d82 100%); color: #fff; padding: 80px 5%; text-align: center; }
     .cta-banner h2 { font-size: 2.2rem; font-weight: 800; margin-bottom: 20px; color: #fff; }
     .cta-banner p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 40px; }
@@ -30,12 +47,14 @@
     /* 모바일 대응 */
     @media (max-width: 768px) {
       .main-section { padding: 50px 0; }
+      .industry-logo-marquee { padding: 0 0 50px 0; }
       .cta-banner { padding: 60px 5%; }
       .cta-banner h2 { font-size: 1.6rem; }
       .btn-white { font-size: 1rem; padding: 12px 30px; }
       .image-wrap { height: 200px; }
       .image-card-body { padding: 25px 20px; }
       .image-card-body h4 { font-size: 1.25rem; }
+      .logo-item { min-width: 180px; height: 70px; font-size: 0.95rem; }
     }
   </style>
 </head>
@@ -112,14 +131,14 @@
     </div>
   </section>
 
-  <section class="main-section bg-light">
+  <section class="main-section bg-light" style="padding-bottom: 0;">
     <div class="container">
       <div class="section-head center">
         <span class="section-tag">BUSINESS AREAS</span>
         <h2 class="main-title">현장 맞춤형 적용 분야</h2>
       </div>
       
-      <div class="grid-3">
+      <div class="grid-3" style="margin-bottom: 40px;">
         <a href="industry.html" class="image-card">
           <div class="image-wrap"><img src="https://i.imgur.com/ME4TZhs.jpeg" alt="자동차 산업"></div>
           <div class="image-card-body">
@@ -141,6 +160,32 @@
             <p>배터리 초정밀 용접 검사 및 예지 보전</p>
           </div>
         </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="industry-logo-marquee">
+    <div class="container">
+      <div class="logo-marquee">
+        <div class="logo-track">
+          <div class="logo-item">HYUNDAI</div>
+          <div class="logo-item">KIA</div>
+          <div class="logo-item">HD HYUNDAI</div>
+          <div class="logo-item">HANWHA OCEAN</div>
+          <div class="logo-item">SAMSUNG SDI</div>
+          <div class="logo-item">LG ENERGY SOLUTION</div>
+          <div class="logo-item">SK ON</div>
+          <div class="logo-item">POSCO FUTURE M</div>
+
+          <div class="logo-item">HYUNDAI</div>
+          <div class="logo-item">KIA</div>
+          <div class="logo-item">HD HYUNDAI</div>
+          <div class="logo-item">HANWHA OCEAN</div>
+          <div class="logo-item">SAMSUNG SDI</div>
+          <div class="logo-item">LG ENERGY SOLUTION</div>
+          <div class="logo-item">SK ON</div>
+          <div class="logo-item">POSCO FUTURE M</div>
+        </div>
       </div>
     </div>
   </section>
