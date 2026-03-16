@@ -3,16 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>컨텐츠 | 주식회사 씨엠</title>
+  <title>컨텐츠 및 문의 | 주식회사 씨엠</title>
   <link rel="stylesheet" href="style.css">
+  
   <style>
     .board-list li { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #f0f0f0; color: #444; }
     .board-list li span:first-child { font-weight: 500; cursor: pointer; }
     .board-list li span:first-child:hover { color: var(--accent); }
     .board-list li .date { color: #999; font-size: 0.9rem; }
-    .contact-row { display: flex; padding: 15px 0; border-bottom: 1px dashed #eee; }
-    .contact-row span { width: 100px; color: #888; font-weight: bold; }
-    .contact-row strong { color: #111; }
+    
+    .map-wrap { margin-bottom: 40px; }
+    .map-wrap img { width: 100%; height: auto; border-radius: 15px; box-shadow: var(--shadow-light); display: block; border: 1px solid #eee; }
+    .contact-info-box { background: #fff; padding: 40px; border-radius: 15px; box-shadow: var(--shadow-light); border: 1px solid var(--card-border); }
+    .contact-row { display: flex; padding: 15px 0; border-bottom: 1px dashed #eee; font-size: 1.05rem; }
+    .contact-row:last-child { border-bottom: none; }
+    .contact-row span { width: 120px; color: #888; font-weight: bold; flex-shrink: 0; }
+    .contact-row strong { color: #111; word-break: keep-all; }
+
+    .form-wrap { background: #fff; padding: 50px; border-radius: 15px; box-shadow: var(--shadow-light); border: 1px solid var(--card-border); max-width: 800px; margin: 0 auto; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-weight: bold; margin-bottom: 8px; color: #333; }
+    .form-control { width: 100%; padding: 15px; border: 1px solid #ddd; border-radius: 8px; font-size: 1rem; font-family: inherit; transition: 0.3s; background: #fdfdfd; }
+    .form-control:focus { border-color: var(--accent); outline: none; background: #fff; box-shadow: 0 0 0 3px rgba(0,86,179,0.1); }
+    textarea.form-control { min-height: 200px; resize: vertical; }
+    .submit-btn { display: block; width: 100%; background: var(--accent); color: #fff; border: none; padding: 18px; border-radius: 8px; font-size: 1.15rem; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 30px; }
+    .submit-btn:hover { background: #003d82; box-shadow: 0 5px 15px rgba(0,86,179,0.3); }
+
+    @media (max-width: 768px) {
+      .form-wrap { padding: 30px 20px; }
+      .contact-info-box { padding: 30px 20px; }
+      .contact-row { flex-direction: column; gap: 5px; }
+      .contact-row span { width: 100%; font-size: 0.95rem; }
+    }
   </style>
 </head>
 <body>
@@ -43,8 +65,9 @@
 
     <div class="sub-tabs" id="tab-menu">
       <a id="btn-1" onclick="switchTab('tab-1', 'btn-1')" class="active">뉴스 (News)</a>
-      <a id="btn-2" onclick="switchTab('tab-2', 'btn-2')">커뮤니티 (자료실)</a>
-      <a id="btn-3" onclick="switchTab('tab-3', 'btn-3')">오시는 길 및 문의</a>
+      <a id="btn-2" onclick="switchTab('tab-2', 'btn-2')">공지 및 자료실</a>
+      <a id="btn-3" onclick="switchTab('tab-3', 'btn-3')">오시는 길</a>
+      <a id="btn-4" onclick="switchTab('tab-4', 'btn-4')">온라인 문의</a>
     </div>
 
     <div id="tab-1" class="tab-content active">
@@ -62,7 +85,7 @@
 
     <div id="tab-2" class="tab-content">
       <div class="white-card" style="max-width: 900px; margin: 0 auto;">
-        <h3 style="font-size: 1.5rem; margin-bottom: 20px; color: #111;">공지 및 자료실</h3>
+        <h3 style="font-size: 1.5rem; margin-bottom: 20px; color: #111;">자료실</h3>
         <ul class="board-list">
           <li><span>[자료실] Signal HX 장비 펌웨어 업데이트 패치 V2.1</span> <span class="date">2026.03.01</span></li>
           <li><span>[FAQ] Auto-Trigger 기반 신호 수집 파라미터 설정</span> <span class="date">2026.02.28</span></li>
@@ -74,23 +97,53 @@
     </div>
 
     <div id="tab-3" class="tab-content">
-      <div class="split-grid">
-        <div class="img-placeholder" style="min-height: 450px; border: none; padding:0;">
-          <img src="https://i.imgur.com/4ByoG4Y.jpeg" alt="주식회사 씨엠 오시는 길" style="border-radius:15px; box-shadow: var(--shadow-light);">
+      <div style="max-width: 1000px; margin: 0 auto;">
+        <div class="map-wrap">
+          <img src="https://i.imgur.com/4ByoG4Y.jpeg" alt="주식회사 씨엠 오시는 길 약도">
         </div>
-        <div class="white-card">
-          <h3 style="color: var(--accent); font-size: 1.8rem; margin-bottom: 20px; font-weight: 800;">공공기관 및 산업 현장 협업 문의</h3>
-          <p style="color: #666; margin-bottom: 30px;">회사소개, 기술협력, 솔루션 도입, 사업 제안 등 문의를 남겨주시면 신속하게 답변해 드리겠습니다.</p>
-          
+        <div class="contact-info-box">
+          <h3 style="color: var(--accent); font-size: 1.6rem; margin-bottom: 20px; font-weight: 800;">주식회사 씨엠 본사 및 기업연구관</h3>
           <div class="contact-row"><span>회사명</span><strong>주식회사 씨엠 / CM Co., Ltd.</strong></div>
-          <div class="contact-row"><span>대표자</span><strong>최철훈</strong></div>
-          <div class="contact-row"><span>주소</span><strong>경상북도 경산시 하양읍 아이웨어로 31, 407호</strong></div>
-          <div class="contact-row"><span>전화번호</span><strong><a href="tel:0532422407">053-242-2407</a></strong></div>
-          <div class="contact-row"><span>이메일</span><strong><a href="mailto:cm2407@naver.com">cm2407@naver.com</a></strong></div>
+          <div class="contact-row"><span>대표자</span><strong>최 철 훈</strong></div>
+          <div class="contact-row"><span>주소</span><strong>경상북도 경산시 하양읍 아이웨어로 31, 407호 (경산지식산업지구 내)</strong></div>
+          <div class="contact-row"><span>전화번호</span><strong><a href="tel:0532422407" style="color:var(--accent);">053-242-2407</a></strong></div>
+          <div class="contact-row"><span>이메일</span><strong><a href="mailto:cm2407@naver.com" style="color:var(--accent);">cm2407@naver.com</a></strong></div>
           <div class="contact-row"><span>사업자번호</span><strong>711-88-00898</strong></div>
         </div>
       </div>
     </div>
+
+    <div id="tab-4" class="tab-content">
+      <div class="form-wrap">
+        <h3 style="font-size: 1.8rem; margin-bottom: 10px; color: #111; text-align: center; font-weight: 800;">솔루션 도입 및 협업 문의</h3>
+        <p style="text-align: center; color: #666; margin-bottom: 40px; line-height: 1.6;">아래 양식을 작성하여 보내주시면, 담당자가 확인 후 신속하게 연락드리겠습니다.</p>
+        
+        <form action="mailto:cm2407@naver.com" method="post" enctype="text/plain">
+          <div class="form-group">
+            <label for="company">회사명 *</label>
+            <input type="text" id="company" name="회사명" class="form-control" placeholder="예) 주식회사 씨엠" required>
+          </div>
+          <div class="form-group">
+            <label for="name">이름 (담당자명) *</label>
+            <input type="text" id="name" name="이름" class="form-control" placeholder="담당자 성함을 입력해주세요" required>
+          </div>
+          <div class="form-group">
+            <label for="phone">전화번호 *</label>
+            <input type="tel" id="phone" name="전화번호" class="form-control" placeholder="연락 가능한 번호를 입력해주세요" required>
+          </div>
+          <div class="form-group">
+            <label for="email">메일주소 *</label>
+            <input type="email" id="email" name="메일주소" class="form-control" placeholder="답변 받으실 이메일을 입력해주세요" required>
+          </div>
+          <div class="form-group">
+            <label for="message">문의사항 *</label>
+            <textarea id="message" name="문의사항" class="form-control" placeholder="도입하시려는 설비 종류, 현장 상황, 궁금하신 점 등을 상세히 적어주시면 더욱 정확한 상담이 가능합니다." required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">작성 완료 및 메일 보내기 ✉️</button>
+        </form>
+      </div>
+    </div>
+
   </main>
 
   <footer class="site-footer"><p>&copy; 2026 CM Co., Ltd. All rights reserved.</p></footer>
@@ -113,8 +166,16 @@
       });
     }
 
+    // URL 비밀 신호(?tab=4) 처리 로직
     window.addEventListener('pageshow', function() {
-      setTimeout(function() { window.scrollTo({ top: 0, behavior: 'instant' }); }, 10);
+      setTimeout(function() { 
+        const urlParams = new URLSearchParams(window.location.search);
+        if(urlParams.get('tab') === '4') {
+          switchTab('tab-4', 'btn-4');
+        } else {
+          window.scrollTo({ top: 0, behavior: 'instant' }); 
+        }
+      }, 10);
     });
   </script>
 </body>
