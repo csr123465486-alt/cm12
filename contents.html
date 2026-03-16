@@ -7,11 +7,15 @@
   <link rel="stylesheet" href="style.css">
   
   <style>
+    /* 게시판 리스트 스타일 */
+    .board-wrap { position: relative; }
+    .board-list { clear: both; }
     .board-list li { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid #f0f0f0; color: #444; }
     .board-list li span:first-child { font-weight: 500; cursor: pointer; }
     .board-list li span:first-child:hover { color: var(--accent); }
     .board-list li .date { color: #999; font-size: 0.9rem; }
     
+    /* 오시는 길 레이아웃 */
     .map-wrap { margin-bottom: 40px; }
     .map-wrap img { width: 100%; height: auto; border-radius: 15px; box-shadow: var(--shadow-light); display: block; border: 1px solid #eee; }
     .contact-info-box { background: #fff; padding: 40px; border-radius: 15px; box-shadow: var(--shadow-light); border: 1px solid var(--card-border); }
@@ -20,6 +24,7 @@
     .contact-row span { width: 120px; color: #888; font-weight: bold; flex-shrink: 0; }
     .contact-row strong { color: #111; word-break: keep-all; }
 
+    /* 온라인 문의 폼 스타일 */
     .form-wrap { background: #fff; padding: 50px; border-radius: 15px; box-shadow: var(--shadow-light); border: 1px solid var(--card-border); max-width: 800px; margin: 0 auto; }
     .form-group { margin-bottom: 20px; }
     .form-group label { display: block; font-weight: bold; margin-bottom: 8px; color: #333; }
@@ -28,6 +33,18 @@
     textarea.form-control { min-height: 200px; resize: vertical; }
     .submit-btn { display: block; width: 100%; background: var(--accent); color: #fff; border: none; padding: 18px; border-radius: 8px; font-size: 1.15rem; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 30px; }
     .submit-btn:hover { background: #003d82; box-shadow: 0 5px 15px rgba(0,86,179,0.3); }
+
+    /* 🔥 관리자 전용 UI 스타일 */
+    .admin-write-btn { display: none; /* 기본은 숨김 */ float: right; background: #333; color: #fff; border: none; padding: 8px 15px; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-bottom: 10px; }
+    .admin-write-btn:hover { background: var(--accent); }
+    
+    /* 팝업 모달창 스타일 */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 99999; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
+    .modal-content { background: #fff; width: 90%; max-width: 500px; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); position: relative; animation: modalFade 0.3s ease-out; }
+    @keyframes modalFade { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+    .modal-close { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #999; }
+    .modal-close:hover { color: #111; }
+    .modal-title { font-size: 1.4rem; font-weight: 800; margin-bottom: 20px; color: #111; border-bottom: 2px solid #111; padding-bottom: 10px; }
 
     @media (max-width: 768px) {
       .form-wrap { padding: 30px 20px; }
@@ -71,9 +88,11 @@
     </div>
 
     <div id="tab-1" class="tab-content active">
-      <div class="white-card" style="max-width: 900px; margin: 0 auto;">
-        <h3 style="font-size: 1.5rem; margin-bottom: 20px; color: #111;">최신 뉴스</h3>
-        <ul class="board-list">
+      <div class="white-card board-wrap" style="max-width: 900px; margin: 0 auto;">
+        <h3 style="font-size: 1.5rem; margin-bottom: 20px; color: #111; float: left;">최신 뉴스</h3>
+        <button class="admin-write-btn" onclick="openWriteModal('newsList')">✍️ 글쓰기</button>
+        
+        <ul class="board-list" id="newsList">
           <li><span>주식회사 씨엠, 2026 차세대 예지보전 솔루션 발표</span> <span class="date">2026.03.10</span></li>
           <li><span>국내 최대 자동차 부품사 AI 분석 모듈 공급 계약</span> <span class="date">2026.02.15</span></li>
           <li><span>코엑스 스마트팩토리 자동화 산업전 부스 참가 안내</span> <span class="date">2026.01.20</span></li>
@@ -84,9 +103,11 @@
     </div>
 
     <div id="tab-2" class="tab-content">
-      <div class="white-card" style="max-width: 900px; margin: 0 auto;">
-        <h3 style="font-size: 1.5rem; margin-bottom: 20px; color: #111;">자료실</h3>
-        <ul class="board-list">
+      <div class="white-card board-wrap" style="max-width: 900px; margin: 0 auto;">
+        <h3 style="font-size: 1.5rem; margin-bottom: 20px; color: #111; float: left;">자료실</h3>
+        <button class="admin-write-btn" onclick="openWriteModal('noticeList')">✍️ 글쓰기</button>
+        
+        <ul class="board-list" id="noticeList">
           <li><span>[자료실] Signal HX 장비 펌웨어 업데이트 패치 V2.1</span> <span class="date">2026.03.01</span></li>
           <li><span>[FAQ] Auto-Trigger 기반 신호 수집 파라미터 설정</span> <span class="date">2026.02.28</span></li>
           <li><span>[공지] 고객지원센터 설 연휴 휴무 안내</span> <span class="date">2026.02.01</span></li>
@@ -120,24 +141,19 @@
         
         <form action="mailto:cm2407@naver.com" method="post" enctype="text/plain">
           <div class="form-group">
-            <label for="company">회사명 *</label>
-            <input type="text" id="company" name="회사명" class="form-control" placeholder="예) 주식회사 씨엠" required>
+            <label>회사명 *</label><input type="text" class="form-control" placeholder="예) 주식회사 유담" required>
           </div>
           <div class="form-group">
-            <label for="name">이름 (담당자명) *</label>
-            <input type="text" id="name" name="이름" class="form-control" placeholder="담당자 성함을 입력해주세요" required>
+            <label>이름 (담당자명) *</label><input type="text" class="form-control" placeholder="담당자 성함을 입력해주세요" required>
           </div>
           <div class="form-group">
-            <label for="phone">전화번호 *</label>
-            <input type="tel" id="phone" name="전화번호" class="form-control" placeholder="연락 가능한 번호를 입력해주세요" required>
+            <label>전화번호 *</label><input type="tel" class="form-control" placeholder="연락 가능한 번호를 입력해주세요" required>
           </div>
           <div class="form-group">
-            <label for="email">메일주소 *</label>
-            <input type="email" id="email" name="메일주소" class="form-control" placeholder="답변 받으실 이메일을 입력해주세요" required>
+            <label>메일주소 *</label><input type="email" class="form-control" placeholder="답변 받으실 이메일을 입력해주세요" required>
           </div>
           <div class="form-group">
-            <label for="message">문의사항 *</label>
-            <textarea id="message" name="문의사항" class="form-control" placeholder="도입하시려는 설비 종류, 현장 상황, 궁금하신 점 등을 상세히 적어주시면 더욱 정확한 상담이 가능합니다." required></textarea>
+            <label>문의사항 *</label><textarea class="form-control" placeholder="도입 설비 종류, 현장 상황 등을 상세히 적어주세요." required></textarea>
           </div>
           <button type="submit" class="submit-btn">작성 완료 및 메일 보내기 ✉️</button>
         </form>
@@ -146,9 +162,34 @@
 
   </main>
 
-  <footer class="site-footer"><p>&copy; 2026 CM Co., Ltd. All rights reserved.</p></footer>
+  <footer class="site-footer">
+    <p>&copy; 2026 CM Co., Ltd. All rights reserved. 
+      <span onclick="openLoginModal()" style="cursor:pointer; color:#ccc; margin-left:10px;">[Admin]</span>
+    </p>
+  </footer>
+
+  <div class="modal-overlay" id="loginModal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal('loginModal')">&times;</span>
+      <h3 class="modal-title">관리자 로그인</h3>
+      <p style="color:#666; margin-bottom:20px; font-size:0.9rem;">게시판 글쓰기 권한을 위해 비밀번호를 입력하세요.</p>
+      <input type="password" id="adminPwd" class="form-control" placeholder="비밀번호 입력 (테스트용: 1234)">
+      <button class="submit-btn" onclick="checkAdmin()" style="padding:12px; margin-top:15px;">로그인</button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="writeModal">
+    <div class="modal-content">
+      <span class="modal-close" onclick="closeModal('writeModal')">&times;</span>
+      <h3 class="modal-title">게시물 등록</h3>
+      <input type="text" id="postTitle" class="form-control" placeholder="게시물 제목을 입력하세요" style="margin-bottom:15px;">
+      <input type="date" id="postDate" class="form-control" style="margin-bottom:15px;">
+      <button class="submit-btn" onclick="submitPost()" style="padding:12px; margin-top:15px;">등록하기</button>
+    </div>
+  </div>
 
   <script>
+    // 탭 전환 로직
     function switchTab(tabId, btnId) {
       document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
       document.querySelectorAll('#tab-menu a').forEach(b => b.classList.remove('active'));
@@ -157,6 +198,7 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    // 모바일 햄버거 메뉴
     const menuToggleBtn = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.site-nav');
     if(menuToggleBtn && navMenu) {
@@ -166,17 +208,69 @@
       });
     }
 
-    // URL 비밀 신호(?tab=4) 처리 로직
+    // URL 탭 파라미터 처리
     window.addEventListener('pageshow', function() {
       setTimeout(function() { 
         const urlParams = new URLSearchParams(window.location.search);
-        if(urlParams.get('tab') === '4') {
-          switchTab('tab-4', 'btn-4');
-        } else {
-          window.scrollTo({ top: 0, behavior: 'instant' }); 
-        }
+        if(urlParams.get('tab') === '4') { switchTab('tab-4', 'btn-4'); } 
+        else { window.scrollTo({ top: 0, behavior: 'instant' }); }
       }, 10);
     });
+
+    /* ==========================================
+       🔥 관리자 및 글쓰기 로직
+       ========================================== */
+    let currentTargetBoard = ''; // 어느 게시판에 쓸지 저장하는 변수
+
+    // 팝업 닫기
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+    
+    // 로그인 팝업 열기 (푸터 Admin 클릭 시)
+    function openLoginModal() { document.getElementById('loginModal').style.display = 'flex'; }
+    
+    // 로그인 확인
+    function checkAdmin() {
+      const pwd = document.getElementById('adminPwd').value;
+      if(pwd === '1234') { // 테스트용 비밀번호입니다.
+        alert('관리자 인증이 완료되었습니다. 글쓰기 버튼이 활성화됩니다.');
+        closeModal('loginModal');
+        // 관리자 버튼 활성화
+        document.querySelectorAll('.admin-write-btn').forEach(btn => btn.style.display = 'block');
+      } else {
+        alert('비밀번호가 틀렸습니다.');
+      }
+    }
+
+    // 글쓰기 팝업 열기
+    function openWriteModal(boardId) {
+      currentTargetBoard = boardId;
+      document.getElementById('postTitle').value = ''; // 제목 초기화
+      document.getElementById('postDate').value = new Date().toISOString().substring(0, 10); // 오늘 날짜 세팅
+      document.getElementById('writeModal').style.display = 'flex';
+    }
+
+    // 글 등록하기 (임시 화면 시뮬레이션)
+    function submitPost() {
+      const title = document.getElementById('postTitle').value;
+      const dateRaw = document.getElementById('postDate').value;
+      
+      if(title.trim() === '') { alert('제목을 입력해주세요.'); return; }
+      
+      // 날짜 포맷 변경 (YYYY-MM-DD -> YYYY.MM.DD)
+      const dateStr = dateRaw.replace(/-/g, '.');
+
+      // 새로운 리스트 요소 만들기
+      const newLi = document.createElement('li');
+      newLi.innerHTML = `<span>${title}</span> <span class="date">${dateStr}</span>`;
+      
+      // 해당 게시판의 맨 위에 새 글 추가
+      const board = document.getElementById(currentTargetBoard);
+      board.insertBefore(newLi, board.firstChild);
+      
+      // 팝업 닫기 및 알림
+      closeModal('writeModal');
+      alert('게시물이 성공적으로 등록되었습니다!\n(※ 현재는 시뮬레이션 모드이므로 새로고침하면 초기화됩니다.)');
+    }
   </script>
 </body>
 </html>
